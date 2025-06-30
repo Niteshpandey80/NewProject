@@ -18,7 +18,7 @@ const Login = () => {
 
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
-        navigate('/');
+        navigate('/Home');
       } else {
         alert(response.data.message || "Login failed");
       }
