@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import NoteModel from '../components/NoteModel'
+import axios from 'axios'
 
 const Home = () => {
   const [isModalOpen , setModalOpen] = useState(false) ; 
@@ -11,7 +12,11 @@ const Home = () => {
      try{
               const response = await axios.post(
                 "http://localhost:5000/api/note/add" , 
-                {title , description}
+                {title , description} , {       
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
+      }
               );
               if(response.data.success){
                 closeModel()

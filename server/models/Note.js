@@ -5,5 +5,5 @@ const NoteSchema = new mongoose.Schema({
   description:{type:String , required:true},
   userId:{type:mongoose.Schema.Types.ObjectId , ref:'User'},
 })
-const Note = mongoose.Model('Note' , NoteSchema)
+const Note = mongoose.model('Note' , NoteSchema)
 module.exports = Note ; 
