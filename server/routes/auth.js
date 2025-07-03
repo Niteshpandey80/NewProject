@@ -10,7 +10,7 @@ router.post('/register' , async(req,res)=>{
         const {name,email, password} = req.body;
         const  user = await User.findOne({email})
         if(user){
-            return res.status(401).json({success:false , massage:"User Alreay exist"})
+            return res.status(401).json({success:false , message:"User Alreay exist"})
         }
         const hashPassword = await bcrypt.hash(password , 10)
         const newUser = new User({
@@ -27,7 +27,7 @@ router.post('/login' , async(req,res)=>{
         const {email, password} = req.body;
         const  user = await User.findOne({email})
         if(!user){
-            return res.status(401).json({success:false , message:"User Does Not Exist  "})
+            return res.status(401).json({success:false , message:"Wrong credentials" })
         }
         const checkpassword = await bcrypt.compare(password , user.password)
         if(!checkpassword){

@@ -28,6 +28,7 @@ const Signup = () => {
         <div className='mb-4'>
             <label className='block text-gray-700' htmlFor="name">Name</label>
             <input type="text"
+            value={name}
             onChange={(e)=> setName(e.target.value)}
             className='w-full px-3 py-2 border' 
              placeholder='Enter name '  required/>
@@ -35,12 +36,14 @@ const Signup = () => {
         <div className='mb-4'>
             <label className='block text-gray-700' htmlFor="email">Email</label>
             <input type="email"
+            value={email}
             onChange={(e)=> setEmail(e.target.value)}
             className='w-full px-3 py-2 border'  placeholder='Enter email ' required/>
         </div>
         <div className='mb-4'>
             <label className='block text-gray-700' htmlFor="password">Password</label>
             <input type="password" 
+            value={password}
             onChange={(e)=> setPassword(e.target.value)}
             className='w-full px-3 py-2 border'  placeholder='*********' required/>
         </div>

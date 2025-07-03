@@ -6,14 +6,12 @@ import Login from './pages/Login'
 
 const App = () => {
   return (
-    <BrowserRouter>
     <Routes>
       <Route path='/Home' element={<Home/>} ></Route>
       <Route path='/register' element={<Signup/>} ></Route>
       <Route path='/' element ={<Home/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
     </Routes>
-    </BrowserRouter>
   )
 }
 

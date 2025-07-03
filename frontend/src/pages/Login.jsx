@@ -11,7 +11,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Logging in with", email, password);
     try {
       const response = await axios.post('http://localhost:3000/api/auth/login', {
         email,
