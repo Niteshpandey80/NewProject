@@ -1,11 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import NoteModel from '../components/NoteModel';
 import axios from 'axios';
+import NoteCard from '../components/NoteCard';
 
 const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-
+  const [notes , setNote] = useState([])
+  
+  useEffect(()=>{
+    const fetchNotes = async ()=>{
+         try{
+          const {data} = await axios.get("http://localhost:3000/api/note")
+          setNote(data.notes)
+         }catch(error){
+          console.log(error)
+         }
+    }
+    fetchNotes()
+  })
   const closeModel = () => {
     setModalOpen(false);
   };
@@ -46,6 +59,11 @@ const Home = () => {
   return (
     <div className='bg-gray-100 min-h-screen'>
       <Navbar />
+      <div className='p-3 grid grid-cols-1 md:grid-cols-3'>
+        {notes.map(note=>(
+          <NoteCard note={note} />
+        ))}
+      </div>
       <button
         onClick={() => setModalOpen(true)}
         className='bg-teal-500 text-2xl fixed right-4 bottom-4 text-white font-bold p-4 rounded-full'

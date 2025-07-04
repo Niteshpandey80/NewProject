@@ -10,6 +10,14 @@ const NoteModel = ({ closeModel, addNote }) => {
       alert("Title and Description cannot be empty.");
       return;
     }
+    if (title.length > 30 ) {
+    alert("Title should be less than or equal to 30 characters.");
+    return;
+  } 
+  if(description.length>70){
+    alert("Description should be less than or equal to 70 characters.")
+  }
+  
     await addNote(title, description);
     closeModel();
   };
