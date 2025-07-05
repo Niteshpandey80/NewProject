@@ -6,8 +6,11 @@ import NoteCard from '../components/NoteCard';
 
 const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [filterNotes , setFilterNotes]= useState([]);
   const [notes, setNote] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
+  const [query , setQuery] = useState('')
+
 
   const fetchNotes = async () => {
     try {
@@ -21,6 +24,13 @@ const Home = () => {
   useEffect(() => {
     fetchNotes();
   }, []);
+  useEffect(() => {
+  const filtered = notes.filter((note) =>
+    note.title.toLowerCase().includes(query.toLowerCase()) ||
+    note.description.toLowerCase().includes(query.toLowerCase())
+  );
+  setFilterNotes(filtered);
+}, [query, notes]);
 
   const closeModel = () => {
     setModalOpen(false);
@@ -103,11 +113,11 @@ const Home = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Navbar />
+      <Navbar setQuery={setQuery} />
       <div className="p-3 grid grid-cols-1 md:grid-cols-3">
-        {notes.map((note) => (
+        {filterNotes.length>0?filterNotes.map((note) => (
           <NoteCard onEdit={onEdit} deleteNote={deleteNote} key={note._id} note={note} />
-        ))}
+        )):<p>No notes</p> }
       </div>
       <button
         onClick={() => setModalOpen(true)}
