@@ -105,7 +105,7 @@ const Home = () => {
 
       if (response.data.success) {
         fetchNotes();
-        toast.success("note Added Successfuly")
+        toast.success("Note Added Successfuly")
       } else {
         alert(response.data.message || 'Failed to add note');
       }
