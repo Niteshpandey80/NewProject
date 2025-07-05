@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar';
 import NoteModel from '../components/NoteModel';
 import axios from 'axios';
 import NoteCard from '../components/NoteCard';
+import{toast} from 'react-toastify'
 
 const Home = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -14,7 +15,12 @@ const Home = () => {
 
   const fetchNotes = async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/note');
+      const { data } = await axios.get('http://localhost:3000/api/note',{
+         headers:{
+              Authorization:`Bearer ${localStorage.getItem("token")}`,
+            }
+      }
+      );
       setNote(data.notes);
     } catch (error) {
       console.log(error);
@@ -53,6 +59,7 @@ const Home = () => {
       );
       if (response.data.success) {
         fetchNotes();
+        toast.success("Note Deleted Successfully")
       }
     } catch (error) {
       console.log(error);
@@ -98,6 +105,7 @@ const Home = () => {
 
       if (response.data.success) {
         fetchNotes();
+        toast.success("note Added Successfuly")
       } else {
         alert(response.data.message || 'Failed to add note');
       }

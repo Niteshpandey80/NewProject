@@ -2,6 +2,7 @@ const express = require('express')
 const User = require('../models/User.js')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
+const middleware = require('../middleware/middleware.js')
 
 const router = express.Router()
 
@@ -38,5 +39,8 @@ router.post('/login' , async(req,res)=>{
      } catch (error) {
         return res.status(500).json({success:false , message:"Error in Login Server" })
      }
+});
+router.get('/verify' , middleware ,  async(req,res)=>{
+  return res.status(200).json({success:true , user:req.user})
 })
 module.exports = router
